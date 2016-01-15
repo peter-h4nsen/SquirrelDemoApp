@@ -15,7 +15,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
-                <TextBlock Text="Last check for updates: " FontWeight="Bold" />
+                <TextBlock Text="Last check for updates fint: " FontWeight="Bold" />
                 <TextBlock x:Name="lblLastCheck" Text="-" Foreground="Green" FontWeight="Bold" />
             </StackPanel>
 
