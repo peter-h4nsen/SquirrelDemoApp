@@ -5,10 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SquirrelDemoApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <StackPanel>
-        <Button Content="Update app" Click="btnUpdateApp" />
+        Title="MainWindow" SizeToContent="Height"  Width="525">
 
+    <DockPanel LastChildFill="False" Margin="10">
+        <StackPanel DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                <TextBlock Text="Current running version is: " FontSize="15" FontWeight="Bold" />
+                <TextBlock x:Name="lblCurrentVersion" Text="-" FontSize="15" Foreground="Green" FontWeight="Bold" />
+            </StackPanel>
 
-    </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                <TextBlock Text="Last check for updates: " FontWeight="Bold" />
+                <TextBlock x:Name="lblLastCheck" Text="-" Foreground="Green" FontWeight="Bold" />
+            </StackPanel>
+
+            <TextBlock Text="Update info" />
+            <ListBox x:Name="lbUpdates" Height="200" FontSize="11" Margin="0,0,0,10">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+
+            <TextBlock Text="Log dump" />
+            <ListBox x:Name="lbLog" Height="200" FontSize="11" Margin="0,0,0,10">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+            
+            <TextBlock Text="Latest exception" />
+            <TextBox x:Name="txtException" Height="200"  />
+        </StackPanel>
+    </DockPanel>
 </Window>
