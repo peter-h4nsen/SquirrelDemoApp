@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <StackPanel>
-        <Button Content="Update app" Click="btnUpdateApp" />
+        <Button Content="Update app det er fint da" Click="btnUpdateApp" />
 
 
     </StackPanel>
