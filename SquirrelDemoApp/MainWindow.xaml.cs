@@ -69,7 +69,7 @@ namespace SquirrelDemoApp
 
             try
             {
-                using (var mgr = new UpdateManager(@"c:\Code\Temp\SquirrelDeployFiles\Releases\"))
+                using (var mgr = new UpdateManager(@"\\WINSERVER-BUILD\SquirrelDeployments\SquirrelDemoApp"))
                 {
                     if (!mgr.IsInstalledApp)
                     {
