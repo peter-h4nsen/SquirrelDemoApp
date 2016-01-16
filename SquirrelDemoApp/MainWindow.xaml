@@ -10,7 +10,7 @@
     <DockPanel LastChildFill="False" Margin="10">
         <StackPanel DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                <TextBlock Text="Current running version is test: " FontSize="15" FontWeight="Bold" />
+                <TextBlock Text="Current running version is : " FontSize="15" FontWeight="Bold" />
                 <TextBlock x:Name="lblCurrentVersion" Text="-" FontSize="15" Foreground="Green" FontWeight="Bold" />
             </StackPanel>
 
