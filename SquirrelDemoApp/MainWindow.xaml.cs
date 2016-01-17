@@ -36,10 +36,9 @@ namespace SquirrelDemoApp
         {
             var taskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
-            RunPeriodicallyAsync(
-                () => RunUpdateAndShowResult(taskScheduler), 
-                TimeSpan.FromSeconds(60)
-            ).Forget();
+            new Func<Task>(() => RunUpdateAndShowResult(taskScheduler))
+                .RunPeriodicallyAsync(TimeSpan.FromSeconds(60))
+                .Forget();
         }
 
         private Task RunUpdateAndShowResult(TaskScheduler continuationTaskScheduler)
@@ -176,26 +175,5 @@ namespace SquirrelDemoApp
             lb.Items.Add(message);
             lb.ScrollIntoView(message);
         }
-
-        private Task RunPeriodicallyAsync(Func<Task> runWork, TimeSpan delay)
-        {
-            return RunPeriodicallyAsync(runWork, delay, CancellationToken.None);
-        }
-
-        private async Task RunPeriodicallyAsync(Func<Task> runWork, TimeSpan delay, CancellationToken ct)
-        {
-            if (runWork == null)
-                return;
-
-            while (true)
-            {
-                ct.ThrowIfCancellationRequested();
-
-                await runWork().ConfigureAwait(false);
-                await Task.Delay(delay, ct).ConfigureAwait(false);
-            }
-        }
-
-        
     }
 }
