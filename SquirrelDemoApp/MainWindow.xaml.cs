@@ -77,6 +77,8 @@ namespace SquirrelDemoApp
                     }
                     else
                     {
+                        Debugger.Launch();
+
                         // Contact releases location to get info about updates.
                         UpdateInfo updateInfo = await mgr.CheckForUpdate().ConfigureAwait(false);
                         result.Logs.Add("Check for updates succeeded.");
@@ -92,6 +94,9 @@ namespace SquirrelDemoApp
                                 result.Logs.Add($"Download of {releases.Count} releases succeeded.");
 
                                 var newVersion = await mgr.ApplyReleases(updateInfo).ConfigureAwait(false);
+
+                                var b = updateInfo.CurrentlyInstalledVersion;
+
                                 result.Logs.Add($"Apply releases succeeded. Updated to version: {newVersion}");
                                 result.IsAppUpdated = true;
                                 result.UpdateVersion = newVersion;
