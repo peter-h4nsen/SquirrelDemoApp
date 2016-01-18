@@ -41,7 +41,7 @@
 
         <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
             <TextBlock FontWeight="Bold" Foreground="Green"
-                       Text="Message from GitBot: Hi, I changed this text at [18-01-2016 17:07:46]" />
+                       Text="Message from GitBot: Hi, I changed this text at [18-01-2016 17:43:49]" />
         </StackPanel>
     </StackPanel>
 </Window>
