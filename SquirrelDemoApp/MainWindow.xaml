@@ -41,9 +41,11 @@
 
         <StackPanel Orientation="Horizontal" Margin="0,15,0,10">
             <TextBlock FontWeight="Bold" Foreground="Green"
-                       Text="Message from GitBot: Hi, I changed this text at [19-01-2016 20:54:25]" />
+                       Text="Message from GitBot: Hi, I changed this text at [19-01-2016 21:32:28]" />
         </StackPanel>
         
         <Button Content="Restart app!" Click="ButtonRestart_Click" />
+        
+        <TextBlock x:Name="btnBuildConfigration" Text="Build configuration is RELEASE" Margin="0,10,0,0" Foreground="Blue" FontWeight="Bold" />
     </StackPanel>
 </Window>

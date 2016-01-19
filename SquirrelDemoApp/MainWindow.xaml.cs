@@ -33,6 +33,14 @@ namespace SquirrelDemoApp
                 @"\\WINSERVER-BUILD\SquirrelDeployments\SquirrelDemoApp", 
                 TimeSpan.FromSeconds(60), 
                 ShowUpdateResult, ShowUpdateError);
+
+
+#if DEBUG
+            btnBuildConfigration.Text = "Build configuration is DEBUG";
+#else
+            btnBuildConfigration.Text = "Build configuration is RELEASE";
+#endif
+
         }
 
         private void ShowUpdateResult(UpdateAppResult result)
