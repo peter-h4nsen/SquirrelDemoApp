@@ -29,113 +29,25 @@ namespace SquirrelDemoApp
         {
             InitializeComponent();
 
-            StartPeriodicAppUpdate();
-        }
-
-        private void StartPeriodicAppUpdate()
-        {
-            var taskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
-
-            new Func<Task>(() => RunUpdateAndShowResult(taskScheduler))
-                .RunPeriodicallyAsync(TimeSpan.FromSeconds(60))
-                .Forget();
-        }
-
-        private Task RunUpdateAndShowResult(TaskScheduler continuationTaskScheduler)
-        {
-            var updateTask = 
-                RunAppUpdateAsync()
-                .ContinueWith(async task =>
-                {
-                    try
-                    {
-                        UpdateAppResult result = await task.ConfigureAwait(false);
-                        ShowUpdateResult(result);
-                    }
-                    catch (Exception ex)
-                    {
-                        ShowUpdateError(ex);
-                    }
-                }, continuationTaskScheduler);
-
-            return updateTask;
-        }
-
-        private async Task<UpdateAppResult> RunAppUpdateAsync()
-        {
-            var result = new UpdateAppResult();
-            result.IsInstalledApp = true;
-
-            try
-            {
-                using (var mgr = new UpdateManager(@"\\WINSERVER-BUILD\SquirrelDeployments\SquirrelDemoApp"))
-                {
-                    if (!mgr.IsInstalledApp)
-                    {
-                        result.IsInstalledApp = false;
-                    }
-                    else
-                    {
-                        // Contact releases location to get info about updates.
-                        UpdateInfo updateInfo = await mgr.CheckForUpdate().ConfigureAwait(false);
-                        result.Logs.Add("Check for updates succeeded.");
-
-                        if (updateInfo != null)
-                        {
-                            List<ReleaseEntry> releases = updateInfo.ReleasesToApply;
-
-                            // If there are pending releases, download them and update the app.
-                            if (releases.Any())
-                            {
-                                await mgr.DownloadReleases(releases).ConfigureAwait(false);
-                                result.Logs.Add($"Download of {releases.Count} releases succeeded.");
-
-                                await mgr.ApplyReleases(updateInfo).ConfigureAwait(false);
-                                var newVersion = updateInfo.FutureReleaseEntry.Version.ToString();
-
-                                result.Logs.Add($"Apply releases succeeded. Updated to version: {newVersion}");
-                                result.IsAppUpdated = true;
-                                result.UpdateVersion = newVersion;
-                            }
-                            else
-                            {
-                                result.Logs.Add("No new releases found.");
-                            }
-                        }
-                        else
-                        {
-                            result.Logs.Add("UpdateInfo object is null.");
-                        }
-
-                        // Always gets the version currently running - also if the app has been updated while running!
-                        result.CurrentRunningVersion = mgr.CurrentlyInstalledVersion().ToString();
-                    }
-                }
-            }
-            catch (Exception ex) when (ex.Message.StartsWith("Update.exe not found"))
-            {
-                result.IsInstalledApp = false;
-            }
-
-            result.Timestamp = DateTime.Now;
-            return result;
+            var appUpdater = new AppUpdater();
+            appUpdater.StartPeriodicAppUpdate(ShowUpdateResult, ShowUpdateError);
         }
 
         private void ShowUpdateResult(UpdateAppResult result)
         {
             // TEST DATA
-            //result = new UpdateAppResult();
-            //result.IsInstalledApp = true;
-            //result.IsAppUpdated = true;
-            //result.UpdateVersion = "4.1.2.3";
-            //result.CurrentRunningVersion = "1.2.3";
-            //result.Timestamp = DateTime.Now;
-            //result.Logs = new List<string>
-            //{
-            //    "Check for updates succeeded.",
-            //    "Download of 5 releases succeeded.",
-            //    "Apply releases succeeded. Updated to version: 1.2.4"
-            //};
+            result = new UpdateAppResult();
+            result.IsInstalledApp = true;
+            result.IsAppUpdated = true;
+            result.UpdateVersion = "4.1.2.3";
+            result.CurrentRunningVersion = "1.2.3";
+            result.Timestamp = DateTime.Now;
+            result.Logs = new List<string>
+            {
+                "Check for updates succeeded.",
+                "Download of 5 releases succeeded.",
+                "Apply releases succeeded. Updated to version: 1.2.4"
+            };
 
             if (!result.IsInstalledApp)
             {
