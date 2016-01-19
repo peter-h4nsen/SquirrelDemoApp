@@ -176,11 +176,6 @@ namespace SquirrelDemoApp
             lb.ScrollIntoView(message);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void ButtonRestart_Click(object sender, RoutedEventArgs e)
         {
             UpdateManager.RestartApp();
