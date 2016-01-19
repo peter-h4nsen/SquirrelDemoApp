@@ -29,25 +29,27 @@ namespace SquirrelDemoApp
         {
             InitializeComponent();
 
-            var appUpdater = new AppUpdater();
-            appUpdater.StartPeriodicAppUpdate(ShowUpdateResult, ShowUpdateError);
+            new AppUpdater().StartPeriodicAppUpdate(
+                @"\\WINSERVER-BUILD\SquirrelDeployments\SquirrelDemoApp", 
+                TimeSpan.FromSeconds(60), 
+                ShowUpdateResult, ShowUpdateError);
         }
 
         private void ShowUpdateResult(UpdateAppResult result)
         {
-            // TEST DATA
-            result = new UpdateAppResult();
-            result.IsInstalledApp = true;
-            result.IsAppUpdated = true;
-            result.UpdateVersion = "4.1.2.3";
-            result.CurrentRunningVersion = "1.2.3";
-            result.Timestamp = DateTime.Now;
-            result.Logs = new List<string>
-            {
-                "Check for updates succeeded.",
-                "Download of 5 releases succeeded.",
-                "Apply releases succeeded. Updated to version: 1.2.4"
-            };
+            //// TEST DATA
+            //result = new UpdateAppResult();
+            //result.IsInstalledApp = true;
+            //result.IsAppUpdated = true;
+            //result.UpdateVersion = "4.1.2.3";
+            //result.CurrentRunningVersion = "1.2.3";
+            //result.Timestamp = DateTime.Now;
+            //result.Logs = new List<string>
+            //{
+            //    "Check for updates succeeded.",
+            //    "Download of 5 releases succeeded.",
+            //    "Apply releases succeeded. Updated to version: 1.2.4"
+            //};
 
             if (!result.IsInstalledApp)
             {
