@@ -36,9 +36,9 @@ namespace SquirrelDemoApp
 
 
 #if DEBUG
-            btnBuildConfigration.Text = "Build configuration is DEBUG";
+            btnBuildConfiguration.Text = "Build configuration is DEBUG";
 #else
-            btnBuildConfigration.Text = "Build configuration is RELEASE";
+            btnBuildConfiguration.Text = "Build configuration is RELEASE";
 #endif
 
         }
