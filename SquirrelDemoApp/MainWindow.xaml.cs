@@ -1,4 +1,6 @@
 ﻿using Squirrel;
+using SquirrelDemoApp.DAL;
+using SquirrelDemoApp.Entities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -30,17 +32,20 @@ namespace SquirrelDemoApp
             InitializeComponent();
 
             new AppUpdater().StartPeriodicAppUpdate(
-                @"\\WINSERVER-BUILD\SquirrelDeployments\SquirrelDemoApp", 
-                TimeSpan.FromSeconds(60), 
+                @"\\WINSERVER-BUILD\SquirrelDeployments\SquirrelDemoApp",
+                TimeSpan.FromSeconds(60),
                 ShowUpdateResult, ShowUpdateError);
 
-
 #if DEBUG
-            btnBuildConfiguration.Text = "Build configuration is DEBUG";
+            txtBuildConfiguration.Text = "Build configuration is DEBUG";
 #else
-            btnBuildConfiguration.Text = "Build configuration is RELEASE";
+            txtBuildConfiguration.Text = "Build configuration is RELEASE";
 #endif
 
+            var connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings["TestDB"].ConnectionString;
+            var repository = new Repository(connectionstring);
+            var dbName = repository.GetDatabaseServerName();
+            txtDbServerName.Text = $"Database server is {dbName}";
         }
 
         private void ShowUpdateResult(UpdateAppResult result)

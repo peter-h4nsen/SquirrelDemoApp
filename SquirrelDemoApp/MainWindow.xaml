@@ -46,6 +46,7 @@
         
         <Button Content="Restart app!" Click="ButtonRestart_Click" />
         
-        <TextBlock x:Name="btnBuildConfiguration" Text="Build configuration is RELEASE" Margin="0,10,0,0" Foreground="Blue" FontWeight="Bold" />
+        <TextBlock x:Name="txtBuildConfiguration" Text="Build configuration is RELEASE" Margin="0,10,0,0" Foreground="Blue" FontWeight="Bold" />
+        <TextBlock x:Name="txtDbServerName" Text="Database server is LOCALHOST" Margin="0,0,0,0" Foreground="Blue" FontWeight="Bold" />
     </StackPanel>
 </Window>
