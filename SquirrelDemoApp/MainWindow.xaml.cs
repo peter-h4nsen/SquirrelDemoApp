@@ -42,10 +42,17 @@ namespace SquirrelDemoApp
             txtBuildConfiguration.Text = "Build configuration is RELEASE";
 #endif
 
-            var connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings["TestDB"].ConnectionString;
-            var repository = new Repository(connectionstring);
-            var dbName = repository.GetDatabaseServerName();
-            txtDbServerName.Text = $"Database server is {dbName}";
+            try
+            {
+                var connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings["Main_TestDB"].ConnectionString;
+                var repository = new Repository(connectionstring);
+                var dbName = repository.GetDatabaseServerName();
+                txtDbServerName.Text = $"Database server is {dbName}";
+            }
+            catch (Exception ex)
+            {
+                txtException.Text = ex.ToString();
+            }
         }
 
         private void ShowUpdateResult(UpdateAppResult result)
