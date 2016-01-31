@@ -41,7 +41,7 @@
 
         <StackPanel Orientation="Horizontal" Margin="0,15,0,10">
             <TextBlock FontWeight="Bold" Foreground="Green"
-                       Text="Message from GitBot: Hi, I changed this text at [23-01-2016 11:50:59]" />
+                       Text="Message from GitBot: Hi, I changed this text at [31-01-2016 18:17:55]" />
         </StackPanel>
         
         <Button Content="Restart app!" Click="ButtonRestart_Click" />
