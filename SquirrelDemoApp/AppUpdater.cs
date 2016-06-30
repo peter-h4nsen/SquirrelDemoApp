@@ -20,6 +20,7 @@ namespace SquirrelDemoApp
             new Func<Task>(() => RunUpdateAndShowResult(urlOrPath, handleUpdateResult, handleUpdateError, taskScheduler))
                 .RunPeriodicallyAsync(interval)
                 .Forget();
+
         }
 
         private Task RunUpdateAndShowResult(string urlOrPath, 

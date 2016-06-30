@@ -32,7 +32,7 @@ namespace SquirrelDemoApp
             InitializeComponent();
 
             new AppUpdater().StartPeriodicAppUpdate(
-                @"\\WINSERVER-BUILD\SquirrelDeployments\SquirrelDemoApp",
+                @"\\WINSERVER2012\SquirrelDeployments\SquirrelDemoApp",
                 TimeSpan.FromSeconds(60),
                 ShowUpdateResult, ShowUpdateError);
 
